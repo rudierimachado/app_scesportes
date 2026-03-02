@@ -3,7 +3,7 @@ from database import SessionLocal, engine
 import models
 from passlib.context import CryptContext
 
-# Create tables
+# Create all tables
 models.Base.metadata.create_all(bind=engine)
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -28,6 +28,8 @@ def init_db():
             print("Admin user created successfully.")
         else:
             print("Admin user already exists.")
+            
+        print("Database initialized successfully with PostgreSQL!")
     except Exception as e:
         print(f"Error initializing database: {e}")
     finally:
