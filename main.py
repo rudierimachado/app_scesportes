@@ -29,7 +29,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    return {"access_token": user.email, "token_type": "bearer"}
+    return {"access_token": user.email, "token_type": "bearer", "user_id": user.id, "role": user.role, "full_name": user.full_name}
 
 # User endpoints
 @app.post("/users/", response_model=schemas.User)
@@ -150,3 +150,7 @@ def delete_event(event_id: int, db: Session = Depends(get_db)):
 @app.get("/")
 def read_root():
     return {"message": "Bem-vindo ao Backend do Arquibancada Digital"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}

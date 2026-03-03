@@ -19,6 +19,9 @@ class User(UserBase):
 class Token(BaseModel):
     access_token: str
     token_type: str
+    user_id: Optional[int] = None
+    role: Optional[str] = None
+    full_name: Optional[str] = None
 
 class MatchBase(BaseModel):
     home_team: str
